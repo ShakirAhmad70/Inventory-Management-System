@@ -15,7 +15,7 @@ public class Inventory {
         System.out.println("1. Add an item in the inventory.");
         System.out.println("2. Increase the count value of an item");
         System.out.println("3. Decrease the count value of an item");
-        System.out.println("4. Delete an item from the inventory.");
+        System.out.println("4. Delete the item from the inventory.");
         System.out.println("5. Update the existing item of the inventory");
         System.out.println("6. Display all the items of the inventory.");
         System.out.println("7. Search the item in the inventory by name and category.");
@@ -45,6 +45,10 @@ public class Inventory {
                     } else {
                         System.out.print("Enter the count value: ");
                         int countValue = inventory.sc.nextInt();
+                        while (countValue<=0){
+                            System.out.print("🙏Please provide me the positive integer as a count value: ");
+                            countValue = inventory.sc.nextInt();
+                        }
                         inventory.sc.nextLine();
                         inventory.incItemCount(posi, countValue);
                     }
@@ -63,6 +67,10 @@ public class Inventory {
                     } else {
                         System.out.print("Enter the count value: ");
                         int countValue = inventory.sc.nextInt();
+                        while (countValue<=0){
+                            System.out.print("🙏Please provide me the positive integer as a count value: ");
+                            countValue = inventory.sc.nextInt();
+                        }
                         inventory.sc.nextLine();
                         inventory.decItemCount(posi, countValue);
                         System.out.println("Decrement of item count done successfully....👍");
@@ -112,7 +120,7 @@ public class Inventory {
             System.out.println("1. Add an item in the inventory.");
             System.out.println("2. Increase the count value of an item");
             System.out.println("3. Decrease the count value of an item");
-            System.out.println("4. Delete an item from the inventory.");
+            System.out.println("4. Delete the item from the inventory.");
             System.out.println("5. Update the existing item of the inventory");
             System.out.println("6. Display all the items of the inventory.");
             System.out.println("7. Search the item in the inventory by name and category.");
@@ -249,11 +257,17 @@ public class Inventory {
                 case 3 -> {
                     System.out.print("⚠️You are forcefully changing the count value⚠️, Are you sure you want to update the count value(Y/N): ");
                     char confirm = sc.next().charAt(0);
+                    while (confirm != 'n' && confirm != 'N' && confirm != 'y' && confirm != 'Y'){
+                        System.out.print("Andhe ho kya bhai🙈, Type only (Y/N): ");
+                        confirm = sc.next().charAt(0);
+                    }
                     if (confirm == 'n' || confirm == 'N') {
+                        sc.nextLine(); //Flush
                         return;
                     }
                     System.out.print("Enter new count value: ");
                     int newCount = sc.nextInt();
+                    sc.nextLine(); //Flush
                     if (newCount > 0) {
                         items.get(posi).setItemCount(newCount);
                         System.out.println("Good job, Your item has been updated successfully in the inventory...👍");
