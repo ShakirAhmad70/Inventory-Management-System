@@ -99,7 +99,7 @@ public class Inventory {
                     }
                     break;
                 case 8:
-                    System.out.println("Exiting the program...🙋‍♀️");
+                    System.out.println("...Exiting the program...\n🙋‍♀️Bye Bye🙋‍, Have a great time...");
                     inventory.sc.close();
                     System.exit(0);
                 default:
@@ -211,22 +211,22 @@ public class Inventory {
         if (posi == -1) {
             System.out.println("Item not found⚠️. Please try again.");
         } else {
-            System.out.print("What would you like to update? : ");
             System.out.println("1. Name");
             System.out.println("2. Category");
             System.out.println("3. Count");
+            System.out.print("What would you like to update? : ");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
                 case 1 -> {
                     System.out.print("Enter new name: ");
-                    String newName = sc.nextLine();
+                    String newName = sc.nextLine().trim();
                     int position = searchItem(newName, category);
-                    if (position != -1) {
+                    if (position != -1 && !name.equalsIgnoreCase(newName)) {
                         System.out.println(
                                 "Item matched with an existing item, So we have incremented the count of the existing item.");
                         incItemCount(position, items.get(posi).getItemCount());
-                        deleteItem(name, category);
+                        items.remove(posi);
                     } else {
                         items.get(posi).setItemName(newName);
                         System.out.println("Good job, Your item has been updated successfully in the inventory...👍");
@@ -234,13 +234,13 @@ public class Inventory {
                 }
                 case 2 -> {
                     System.out.print("Enter new category: ");
-                    String newCat = sc.nextLine();
+                    String newCat = sc.nextLine().trim();
                     int position = searchItem(name, newCat);
-                    if (position != -1) {
+                    if (position != -1 && !category.equalsIgnoreCase(newCat)) {
                         System.out.println(
                                 "Item matched with an existing item, So we have incremented the count of the existing item.");
                         incItemCount(position, items.get(posi).getItemCount());
-                        deleteItem(name, category);
+                        items.remove(posi);
                     } else {
                         items.get(posi).setItemCategory(newCat);
                         System.out.println("Good job, Your item has been updated successfully in the inventory...👍");
@@ -252,7 +252,7 @@ public class Inventory {
                     if (confirm == 'n' || confirm == 'N') {
                         return;
                     }
-                    System.out.print("Enter new count: ");
+                    System.out.print("Enter new count value: ");
                     int newCount = sc.nextInt();
                     if (newCount > 0) {
                         items.get(posi).setItemCount(newCount);
