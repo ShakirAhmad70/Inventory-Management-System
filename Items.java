@@ -1,4 +1,4 @@
-package IMS.ims.src;
+package IMS;
 
 public class Items {
     private int itemCount;
@@ -45,6 +45,6 @@ public class Items {
 
     @Override
     public String toString() {
-        return itemId + "{itemName=" + itemName + ", itemCategory=" + itemCategory + ", itemCount=" + itemCount + '}';
+        return itemId + "{ itemName=" + itemName + ", itemCategory=" + itemCategory + ", itemCount=" + itemCount + " }";
     }
 }
